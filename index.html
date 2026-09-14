@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hatem Yakoubi — Technical Lead &amp; Software Engineer</title>
+<meta name="description" content="Hatem Yakoubi — Technical Lead & Software Engineer. .NET/C# architecture, legacy system migration, AI-assisted development.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1A2B;
+    --panel:#142338;
+    --panel-2:#101c2e;
+    --line:#2A3F5C;
+    --line-soft:#1d3049;
+    --teal:#5EEAD4;
+    --amber:#F2B84B;
+    --text:#E8EEF5;
+    --muted:#93A5BE;
+    --muted-2:#6c839f;
+    --radius:2px;
+    --maxw:920px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size:48px 48px;
+    background-position:-1px -1px;
+    color:var(--text);
+    font-family:'IBM Plex Sans', system-ui, sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:inherit;}
+  ::selection{background:var(--teal); color:var(--ink);}
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--teal);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(14,26,43,0.88);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:60px;
+  }
+  .brand{
+    font-weight:600; font-size:15px; letter-spacing:0.01em;
+    display:flex; align-items:center; gap:8px;
+  }
+  .brand .dot{width:7px; height:7px; background:var(--teal); border-radius:50%; box-shadow:0 0 6px var(--teal);}
+  .navlinks{display:flex; gap:28px; font-size:14px; color:var(--muted);}
+  .navlinks a{text-decoration:none; transition:color .15s;}
+  .navlinks a:hover{color:var(--text);}
+  .navcta{display:flex; gap:10px;}
+  .btn{
+    font-size:13px; padding:8px 14px; border:1px solid var(--line);
+    background:transparent; color:var(--text); text-decoration:none;
+    border-radius:var(--radius); cursor:pointer; font-family:inherit;
+    transition:border-color .15s, background .15s;
+    display:inline-flex; align-items:center; gap:6px;
+  }
+  .btn:hover{border-color:var(--teal); background:rgba(94,234,212,0.06);}
+  .btn.solid{background:var(--teal); color:var(--ink); border-color:var(--teal); font-weight:600;}
+  .btn.solid:hover{background:#7ff0dd;}
+  .navtoggle{display:none; background:none; border:1px solid var(--line); color:var(--text); padding:6px 10px; border-radius:var(--radius);}
+
+  @media (max-width:720px){
+    .navlinks{display:none;}
+    .navtoggle{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:90px 0 70px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .frame-mark{
+    position:absolute; width:22px; height:22px; opacity:0.6;
+  }
+  .frame-mark.tl{top:26px; left:24px; border-top:1px solid var(--muted-2); border-left:1px solid var(--muted-2);}
+  .frame-mark.tr{top:26px; right:24px; border-top:1px solid var(--muted-2); border-right:1px solid var(--muted-2);}
+  @media (max-width:600px){ .frame-mark{display:none;} }
+
+  .eyebrow-row{
+    display:flex; align-items:center; gap:10px;
+    font-size:12.5px; color:var(--muted-2); margin-bottom:22px;
+  }
+  .eyebrow-row .id{color:var(--teal);}
+  .eyebrow-row .sep{color:var(--line);}
+
+  h1{
+    font-size:clamp(34px, 5.4vw, 54px);
+    line-height:1.08;
+    margin:0 0 14px;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    max-width:14ch;
+  }
+  .role-line{
+    font-size:clamp(16px,2.2vw,19px);
+    color:var(--muted);
+    max-width:44ch;
+    margin:0 0 30px;
+  }
+  .role-line .accent{color:var(--teal);}
+
+  .hero-actions{display:flex; flex-wrap:wrap; gap:12px; margin-bottom:52px;}
+
+  .status-panel{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    border:1px solid var(--line);
+    background:var(--panel);
+    position:relative;
+  }
+  .status-panel .cell{
+    padding:16px 20px;
+    border-right:1px solid var(--line);
+  }
+  .status-panel .cell:last-child{border-right:none;}
+  .status-panel .label{
+    font-size:11px; color:var(--muted-2); text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px;
+  }
+  .status-panel .value{font-size:14.5px; color:var(--text); font-weight:500;}
+  .status-panel .value .dot-live{
+    display:inline-block; width:6px; height:6px; border-radius:50%;
+    background:var(--teal); margin-right:7px; box-shadow:0 0 5px var(--teal);
+  }
+  @media (max-width:600px){
+    .status-panel{grid-template-columns:1fr;}
+    .status-panel .cell{border-right:none; border-bottom:1px solid var(--line);}
+    .status-panel .cell:last-child{border-bottom:none;}
+  }
+
+  /* connector line svg drawn from title block to status panel */
+  .connector{position:absolute; left:0; top:0; width:100%; height:100%; pointer-events:none; overflow:visible;}
+  .connector path{
+    fill:none; stroke:var(--teal); stroke-width:1.5; opacity:0.55;
+    stroke-dasharray:400; stroke-dashoffset:400;
+    animation:draw 1.4s ease-out .3s forwards;
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+
+  /* ---------- SECTIONS shared ---------- */
+  section{padding:64px 0; border-bottom:1px solid var(--line-soft);}
+  .section-head{
+    display:flex; align-items:baseline; gap:14px; margin-bottom:34px;
+  }
+  .section-num{font-size:13px; color:var(--teal);}
+  .section-title{font-size:22px; font-weight:600; margin:0;}
+  .section-sub{color:var(--muted-2); font-size:13.5px;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:1.5fr 1fr; gap:48px;}
+  @media (max-width:720px){ .about-grid{grid-template-columns:1fr;} }
+  .about-grid p{color:var(--muted); font-size:15.5px; max-width:58ch;}
+  .about-grid p + p{margin-top:14px;}
+  .stat-list{display:flex; flex-direction:column; gap:0; border:1px solid var(--line);}
+  .stat-row{
+    display:flex; justify-content:space-between; padding:14px 18px;
+    border-bottom:1px solid var(--line);
+    font-size:14px;
+  }
+  .stat-row:last-child{border-bottom:none;}
+  .stat-row .k{color:var(--muted-2);}
+  .stat-row .v{color:var(--text); font-weight:500; text-align:right;}
+
+  /* ---------- EXPERIENCE ---------- */
+  .exp-item{
+    position:relative;
+    padding-left:28px;
+    border-left:1px solid var(--line);
+    padding-bottom:36px;
+  }
+  .exp-item:last-child{padding-bottom:0;}
+  .exp-item::before{
+    content:''; position:absolute; left:-4.5px; top:4px;
+    width:8px; height:8px; background:var(--ink); border:1.5px solid var(--teal);
+    border-radius:50%;
+  }
+  .exp-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px; margin-bottom:4px;}
+  .exp-role{font-size:16.5px; font-weight:600;}
+  .exp-dates{font-size:12.5px; color:var(--muted-2); margin-left:auto;}
+  .exp-org{color:var(--teal); font-size:14px; margin-bottom:12px;}
+  .exp-bullets{margin:0; padding-left:18px; color:var(--muted); font-size:14.5px;}
+  .exp-bullets li{margin-bottom:6px;}
+  .exp-bullets li:last-child{margin-bottom:0;}
+
+  /* ---------- PROJECTS ---------- */
+  .proj-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:720px){ .proj-grid{grid-template-columns:1fr;} }
+  .proj-card{
+    background:var(--panel); padding:24px; display:flex; flex-direction:column;
+  }
+  .proj-top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:10px;}
+  .proj-name{font-size:16px; font-weight:600;}
+  .proj-tag{
+    font-size:10.5px; padding:3px 8px; border:1px solid var(--line); color:var(--muted-2);
+    white-space:nowrap;
+  }
+  .proj-tag.live{color:var(--teal); border-color:var(--teal);}
+  .proj-desc{color:var(--muted); font-size:14px; margin:0 0 16px; flex-grow:1;}
+  .proj-stack{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px;}
+  .stack-pin{
+    font-size:11px; padding:3px 7px; background:var(--panel-2); color:var(--muted); border:1px solid var(--line-soft);
+  }
+  .proj-links{display:flex; gap:14px; font-size:13px;}
+  .proj-links a{text-decoration:none; color:var(--teal); display:flex; align-items:center; gap:5px;}
+  .proj-links a:hover{text-decoration:underline;}
+  .proj-links .disabled{color:var(--muted-2); cursor:default;}
+
+  /* ---------- CERTIFICATIONS ---------- */
+  .cert-row{display:flex; flex-wrap:wrap; gap:1px; background:var(--line); border:1px solid var(--line);}
+  .cert-item{background:var(--panel); padding:18px 20px; flex:1 1 220px;}
+  .cert-name{font-weight:600; font-size:14.5px; margin-bottom:4px;}
+  .cert-meta{font-size:12.5px; color:var(--muted-2);}
+  .cert-id{display:block; margin-top:6px; font-size:11px; color:var(--muted-2);}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  @media (max-width:600px){ .contact-grid{grid-template-columns:1fr;} }
+  .contact-box{border:1px solid var(--line); padding:22px;}
+  .contact-box h3{margin:0 0 12px; font-size:14px; color:var(--muted-2); font-weight:500;}
+  .contact-links{display:flex; flex-direction:column; gap:10px;}
+  .contact-links a{
+    text-decoration:none; font-size:15px; color:var(--text);
+    display:flex; align-items:center; gap:8px; padding:8px 0;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .contact-links a:last-child{border-bottom:none;}
+  .contact-links a:hover{color:var(--teal);}
+  .contact-links .arrow{color:var(--muted-2); margin-left:auto;}
+
+  footer{padding:30px 0; text-align:left;}
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+  footer p{color:var(--muted-2); font-size:12.5px; margin:0;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span> Hatem Yakoubi</div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="navcta">
+      <a class="btn" href="mailto:hatemyakoubi15@gmail.com">Email</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="frame-mark tl"></span>
+  <span class="frame-mark tr"></span>
+  <div class="wrap" style="position:relative;">
+    <svg class="connector" viewBox="0 0 872 340" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M 420 150 C 520 150, 560 190, 700 210" />
+    </svg>
+
+    <div class="eyebrow-row">
+      <span class="id mono">HY / 001</span>
+      <span class="sep">·</span>
+      <span>Nabeul, Tunisia</span>
+    </div>
+
+    <h1>Technical Lead &amp; Software Engineer</h1>
+    <p class="role-line">Building and modernizing <span class="accent">.NET/C#</span> enterprise systems — architecture, legacy migration, and AI-assisted engineering.</p>
+
+    <div class="hero-actions">
+      <a class="btn solid" href="#projects">View projects</a>
+      <a class="btn" href="Hatem-Yakoubi-CV-ATS.pdf" download>Download CV (EN)</a>
+      <a class="btn" href="Hatem-Yakoubi-CV-ATS-FR.pdf" download>Download CV (FR)</a>
+    </div>
+
+    <div class="status-panel">
+      <div class="cell">
+        <div class="label">Current role</div>
+        <div class="value"><span class="dot-live"></span>Technical Lead, L-mobile</div>
+      </div>
+      <div class="cell">
+        <div class="label">Core stack</div>
+        <div class="value mono" style="font-size:13px;">C# · ASP.NET Core · TypeScript</div>
+      </div>
+      <div class="cell">
+        <div class="label">Focus</div>
+        <div class="value">Architecture &amp; AI integration</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num mono">01</span>
+      <h2 class="section-title">About</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>I lead architecture and full-stack development for Unicore, a plugin-based warehouse management platform built on ASP.NET Core, NHibernate, and TypeScript. Most of my work is migrating legacy .NET Framework modules into the current architecture incrementally, and designing the integration layers that let independent modules work together without tight coupling.</p>
+        <p>Alongside that, I focus on where AI genuinely helps a development team — I built an AI-assisted visual quality control feature using image comparison, and I work with my team on integrating AI coding assistants into daily workflows.</p>
+        <p>Before this, I spent five years as a programming instructor, and I still mentor junior engineers and students on their final-year projects today. I speak Arabic natively, French fluently, and English professionally.</p>
+      </div>
+      <div class="stat-list">
+        <div class="stat-row"><span class="k">Experience</span><span class="v">10+ years</span></div>
+        <div class="stat-row"><span class="k">At L-mobile</span><span class="v">Since Oct 2022</span></div>
+        <div class="stat-row"><span class="k">Core languages</span><span class="v">C#, TypeScript, Python</span></div>
+        <div class="stat-row"><span class="k">Location</span><span class="v">Nabeul, Tunisia</span></div>
+        <div class="stat-row"><span class="k">Languages spoken</span><span class="v">AR · FR · EN</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num mono">02</span>
+      <h2 class="section-title">Experience</h2>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-head">
+        <span class="exp-role">Technical Lead &amp; Software Engineer</span>
+        <span class="exp-dates mono">Oct 2022 — Present</span>
+      </div>
+      <div class="exp-org">L-mobile Systeme GmbH &amp; Co. KG · Nabeul</div>
+      <ul class="exp-bullets">
+        <li>Lead architecture and full-stack development for Unicore, a plugin-based warehouse management platform (ASP.NET Core, .NET 8, NHibernate, TypeScript, SignalR, OData)</li>
+        <li>Migrate legacy .NET Framework modules into the current architecture incrementally, with zero production downtime</li>
+        <li>Design cross-module integration systems used across the platform</li>
+        <li>Build AI-assisted features, including automated visual quality control using image comparison</li>
+        <li>Integrate third-party and industrial IoT hardware — RFID, SpeedyPick, Wermalight, industrial scales</li>
+        <li>Define coding standards and CI/CD pipelines; mentor interns and junior developers</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-head">
+        <span class="exp-role">IT Trainer — Web Development &amp; OOP</span>
+        <span class="exp-dates mono">Mar 2017 — Mar 2022</span>
+      </div>
+      <div class="exp-org">Centre de Formation Privée Electroworks · Gafsa</div>
+      <ul class="exp-bullets">
+        <li>Delivered project-based training in Java, C#, HTML5/CSS3, PHP7, Symfony, React.js, Angular, and Python</li>
+        <li>Designed curricula bridging fundamentals with real-world development practices</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-head">
+        <span class="exp-role">Academic Project Supervisor — Freelance</span>
+        <span class="exp-dates mono">2020 — 2022</span>
+      </div>
+      <div class="exp-org">Self-employed</div>
+      <ul class="exp-bullets">
+        <li>Mentored a student on "Voisinage," a final-year project building a collaborative-consumption web platform (Symfony, PHP, AJAX, HTML5/CSS3, Git, Swagger)</li>
+        <li>Implemented a document management (GED) system for client Rainbow Integration, delivered in Symfony/PHP/AJAX</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-head">
+        <span class="exp-role">Freelance Software Developer</span>
+        <span class="exp-dates mono">Jun 2013 — 2019</span>
+      </div>
+      <div class="exp-org">Self-employed</div>
+      <ul class="exp-bullets">
+        <li>Built a Training Center Management Platform — scheduling, invoicing, attendance tracking, Chart.js dashboards (Symfony, PHP, jQuery, MySQL)</li>
+        <li>Built an Inventory &amp; Stock Management desktop system (.NET, C#, SQL Server)</li>
+        <li>Built a desktop app to organize packaging-line materials using barcode-based calculation (C#, .NET)</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-head">
+        <span class="exp-role">IT &amp; Operations Lead</span>
+        <span class="exp-dates mono">May 2010 — Jan 2012</span>
+      </div>
+      <div class="exp-org">Société Takwa · Gafsa</div>
+      <ul class="exp-bullets">
+        <li>Managed the store's IT systems, stock management, and staff operations for a large retail operation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num mono">03</span>
+      <h2 class="section-title">Projects</h2>
+      <span class="section-sub">Selected work, linked to source where public</span>
+    </div>
+
+    <div class="proj-grid">
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <span class="proj-name">DocuMind</span>
+          <!--<span class="proj-tag live">Public repo</span>-->
+        </div>
+        <p class="proj-desc">Multi-tenant SaaS foundation for AI document processing — upload, OCR, AI field extraction, and validation, with provider-agnostic AI integration.</p>
+        <div class="proj-stack">
+          <span class="stack-pin">ASP.NET Core 9</span>
+          <span class="stack-pin">CQRS / MediatR</span>
+          <span class="stack-pin">EF Core</span>
+          <span class="stack-pin">PostgreSQL</span>
+          <span class="stack-pin">React + TS</span>
+        </div>
+       <!-- <div class="proj-links">
+          <a href="https://github.com/hatemyakoubi/DocuMind" target="_blank" rel="noopener">View source ↗</a>
+        </div>-->
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <span class="proj-name">Nexio</span>
+         <!--<span class="proj-tag live">Public repo</span>-->
+        </div>
+        <p class="proj-desc">Automated assembly planning platform — turns 3D CAD assemblies into step-by-step instructions using a deterministic symbolic-AI engine.</p>
+        <div class="proj-stack">
+          <span class="stack-pin">NestJS</span>
+          <span class="stack-pin">Python FastAPI</span>
+          <span class="stack-pin">Neo4j</span>
+          <span class="stack-pin">Kafka</span>
+          <span class="stack-pin">React + Three.js</span>
+        </div>
+        <!--<div class="proj-links">
+          <a href="https://github.com/hatemyakoubi/Nexio-V2" target="_blank" rel="noopener">View source ↗</a>
+        </div>-->
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <span class="proj-name">Training Center Platform</span>
+          <!--<span class="proj-tag live">Public repo</span>-->
+        </div>
+        <p class="proj-desc">Scheduling, invoicing, and attendance system built for a private training center — multi-group scheduling with real-time KPI dashboards.</p>
+        <div class="proj-stack">
+          <span class="stack-pin">Symfony</span>
+          <span class="stack-pin">PHP</span>
+          <span class="stack-pin">MySQL</span>
+          <span class="stack-pin">Chart.js</span>
+        </div>
+        <!--<div class="proj-links">
+          <a href="https://github.com/hatemyakoubi/lastElectroworks" target="_blank" rel="noopener">View source ↗</a>
+        </div>-->
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <span class="proj-name">Inventory &amp; Stock Management</span>
+          <!--<span class="proj-tag live">Public repo</span>-->
+        </div>
+        <p class="proj-desc">Desktop application for stock control, supplier tracking, and purchase orders, built with transactional data integrity as a core requirement.</p>
+        <div class="proj-stack">
+          <span class="stack-pin">Java</span>
+          <span class="stack-pin">NetBeans</span>
+        </div>
+        <!--<div class="proj-links">
+          <a href="https://github.com/hatemyakoubi/gestion_stock_java" target="_blank" rel="noopener">View source ↗</a>
+        </div>-->
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <span class="proj-name">Voisinage</span>
+          <!--<span class="proj-tag">Case study</span>-->
+        </div>
+        <p class="proj-desc">Collaborative-consumption platform connecting neighbors to share, exchange, and lend everyday items. Mentored as a final-year student project.</p>
+        <div class="proj-stack">
+          <span class="stack-pin">Symfony</span>
+          <span class="stack-pin">PHP</span>
+          <span class="stack-pin">AJAX</span>
+          <span class="stack-pin">Swagger</span>
+        </div>
+        <!--<div class="proj-links">
+          <span class="disabled">Repo pending public access</span>
+        </div>-->
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <span class="proj-name">GED — Document Management</span>
+          <!--<span class="proj-tag">Case study</span>-->
+        </div>
+        <p class="proj-desc">Document management system delivered for client Rainbow Integration, implemented from their initial requirements brief.</p>
+        <div class="proj-stack">
+          <span class="stack-pin">Symfony</span>
+          <span class="stack-pin">PHP</span>
+          <span class="stack-pin">AJAX</span>
+        </div>
+        <!--<div class="proj-links">
+          <span class="disabled">Repo pending public access</span>
+        </div>-->
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <span class="proj-name">E-commerce Platform</span>
+         <!--<span class="proj-tag live">Public repo</span>-->
+        </div>
+        <p class="proj-desc">Full-featured e-commerce application built on the Symfony framework.</p>
+        <div class="proj-stack">
+          <span class="stack-pin">Symfony</span>
+          <span class="stack-pin">PHP</span>
+        </div>
+        <!--<div class="proj-links">
+          <a href="https://github.com/hatemyakoubi/ecommerce" target="_blank" rel="noopener">View source ↗</a>
+        </div>-->
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <span class="proj-name">Packaging Line Organizer</span>
+          <!--<span class="proj-tag">Screenshot</span>-->
+        </div>
+        <p class="proj-desc">Desktop application to organize materials into boxes on a packaging line, using a barcode-based calculation system.</p>
+        <div class="proj-stack">
+          <span class="stack-pin">C#</span>
+          <span class="stack-pin">.NET</span>
+        </div>
+        <!--<div class="proj-links">
+          <span class="disabled">Not on GitHub</span>
+        </div>-->
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num mono">04</span>
+      <h2 class="section-title">Certifications</h2>
+    </div>
+    <div class="cert-row">
+      <div class="cert-item">
+        <div class="cert-name">Scrum Foundation Professional Certification (SFPC)</div>
+        <div class="cert-meta">CertiProf · Jan 2024</div>
+        <span class="cert-id mono">ID 93409804</span>
+      </div>
+      <div class="cert-item">
+        <div class="cert-name">Claude Code in Action</div>
+        <div class="cert-meta">Anthropic · May 2026</div>
+        <span class="cert-id mono">ID deyoz2he9gyy</span>
+      </div>
+      <div class="cert-item">
+        <div class="cert-name">Claude 101</div>
+        <div class="cert-meta">Anthropic · May 2026</div>
+        <span class="cert-id mono">ID u3ieqert8diq</span>
+      </div>
+      <div class="cert-item">
+        <div class="cert-name">AI Fluency: Framework &amp; Foundations</div>
+        <div class="cert-meta">Anthropic · May 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num mono">05</span>
+      <h2 class="section-title">Contact</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-box">
+        <h3>Get in touch</h3>
+        <div class="contact-links">
+          <a href="mailto:hatemyakoubi15@gmail.com">hatemyakoubi15@gmail.com <span class="arrow">→</span></a>
+          <a href="tel:+21658685631">+216 58 685 631 <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <div class="contact-box">
+        <h3>Elsewhere</h3>
+        <div class="contact-links">
+          <a href="https://linkedin.com/in/hatem-yakoubi-65298419a" target="_blank" rel="noopener">LinkedIn <span class="arrow">→</span></a>
+          <a href="https://github.com/hatemyakoubi" target="_blank" rel="noopener">GitHub <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Hatem Yakoubi — Nabeul, Tunisia</p>
+    <!--<p class="mono">Built with care.</p>-->
+  </div>
+</footer>
+
+<script>
+  // mobile nav is intentionally simplified — links remain reachable via scroll
+</script>
+
+</body>
+</html>
